@@ -90,15 +90,72 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
-
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
 
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
-
-
-
     <script src="{{ asset('js/main.js') }}"></script>
 
+
+
+
+    <script>
+
+    $(document).ready(function(){
+        // ..................... Notificiton ...............
+        @if(Session::has('message'))
+
+        var type = "{{ Session::get('alert-type','success') }}";
+
+        switch (type)
+        {
+            case 'success':
+                toastr.success("{{ Session::get('message') }}", {timeOut: 5000});
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}", {timeOut: 5000});
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}", {timeOut: 5000});
+                break;
+            case 'info':
+                toastr.info("{{ Session::get('message') }}", {timeOut: 5000});
+                break;
+
+
+        }
+
+        @endif
+
+            // ...................... Sweet Alert .............
+
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+
+            // console.log(url);
+
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            })
+                // Promisse.........
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                       setTimeout(function(){
+                           window.location.href = url;
+                       },3000)
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        });
+    });
+    </script>
 
 </body>
 </html>
