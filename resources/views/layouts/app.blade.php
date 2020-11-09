@@ -67,6 +67,13 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a href="{{ route('change_password') }}" class="dropdown-item">
+                                        Password Change
+                                    </a>
+
+                                    <a href="{{ route('index') }}" class="dropdown-item">
+                                       Home
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

@@ -19,5 +19,8 @@ Route::get('/delete_info/{id}', 'PostController@delete_info_method')->name('dele
 Route::post('/insert_post', 'PostController@insert_post_method')->name('insert_post');
 Route::post('/update_post/{id}', 'PostController@update_post_method')->name('update_post');
 
+
+Route::post('/update/password', 'HomeController@update_password_method')->name('update.password');
+Route::get('/change_password', 'HomeController@change_password_method')->name('change_password');
 Auth::routes();
 
